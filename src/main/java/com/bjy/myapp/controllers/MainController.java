@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 @CrossOrigin("*")
 @RestController
@@ -17,23 +18,27 @@ public class MainController {
     @Resource
     MainService mainService;
     @PostMapping("/search")
-    public StanderReturnerPojo search(@RequestBody StanderExchangePojo standerExchangePojo) throws AppException {
+    public StanderReturnerPojo search(HttpServletResponse httpServletResponse, @RequestBody StanderExchangePojo standerExchangePojo) throws AppException {
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         return mainService.doSearch(standerExchangePojo);
     }
 
     @PostMapping("/post")
-    public StanderReturnerPojo post(@RequestBody StanderExchangePojo standerExchangePojo) throws Exception {
+    public StanderReturnerPojo post(HttpServletResponse httpServletResponse,@RequestBody StanderExchangePojo standerExchangePojo) throws Exception {
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         return mainService.doInsert(standerExchangePojo);
 
     }
 
     @PostMapping("/update")
-    public StanderReturnerPojo update(@RequestBody StanderExchangePojo standerExchangePojo) throws Exception {
+    public StanderReturnerPojo update(HttpServletResponse httpServletResponse,@RequestBody StanderExchangePojo standerExchangePojo) throws Exception {
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         return mainService.doUpdate(standerExchangePojo);
     }
 
     @PostMapping("/delete")
-    public StanderReturnerPojo delete(@RequestBody StanderExchangePojo standerExchangePojo) throws AppException {
+    public StanderReturnerPojo delete(HttpServletResponse httpServletResponse,@RequestBody StanderExchangePojo standerExchangePojo) throws AppException {
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
         return mainService.doDelete(standerExchangePojo);
     }
 
